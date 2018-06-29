@@ -40,4 +40,7 @@ set pastetoggle=<F3>
 "let NERDTreeMinimalUI = 1
 "let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
-map <C-o> :NERDTree<CR>
+
+map <C-o> :NERDTreeToggle<CR>
+noremap <F3> :set invnumber<CR>
+
