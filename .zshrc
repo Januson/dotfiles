@@ -67,6 +67,7 @@ plugins=(
   colored-man-pages
   git
   pip
+  wd
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
