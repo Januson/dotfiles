@@ -1,5 +1,5 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
+filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -7,40 +7,38 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'itchyny/lightline.vim'
+Plugin 'sheerun/vim-polyglot'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()
+filetype plugin indent on
 
-set nowrap        " don't wrap lines
-set tabstop=4     " a tab is four spaces
-set backspace=indent,eol,start " allow backspacing over everything in insert mode"
-set autoindent    " always set autoindenting on"
-set copyindent    " copy the previous indentation on autoindenting"
-set number        " always show line numbers"
-set shiftwidth=4  " number of spaces to use for autoindenting"
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'"
-set showmatch     " set show matching parenthesis"
-set ignorecase    " ignore case when searching"
-set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise"
-set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop"
-set hlsearch      " highlight search terms"
-set incsearch     " show search matches as you type"
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
+set nowrap
+set tabstop=4
+set backspace=indent,eol,start
+set autoindent
+set copyindent
+set number
+set shiftwidth=4
+set shiftround
+set showmatch
+set ignorecase
+set smartcase
+set smarttab
+set hlsearch
+set incsearch
+set history=1000
+set undolevels=1000
 set wildignore=*.swp,*.bak,*.pyc,*.class
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
+set title
+set visualbell
+set noerrorbells
 
 set nobackup
 set noswapfile
 set pastetoggle=<F3>
 
-" NerdTree
-"let NERDTreeMinimalUI = 1
-"let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
 
 map <C-o> :NERDTreeToggle<CR>
-noremap <F3> :set invnumber<CR>
+noremap <F4> :set invnumber<CR>
 
