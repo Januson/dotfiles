@@ -1,0 +1,15 @@
+---
+- name: Install Git
+  dnf:
+    name:
+      - git
+    state: latest
+
+- name: Setup git config .files
+  become: yes
+  become_user: "{{ system.user }}"
+  template: src={{ item }}.tpl dest=~/{{ item }} force=yes
+  with_items:
+    - .gitconfig
+    - .gitalias
+    - .gitignore
