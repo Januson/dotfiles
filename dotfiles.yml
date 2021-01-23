@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: "Set up the local development environment"
+  hosts: local
 
   roles:
-    - git
+    - { role: git, tags: [ 'git' ] }
