@@ -1,5 +1,5 @@
-[local]
+[dotfiles]
 localhost
 
-[local:vars]
+[dotfiles:vars]
 ansible_connection=local

@@ -1,10 +1,10 @@
 ---
 - name: Install zsh
   dnf:
-    name: zsh
+    name:
+      - zsh
     state: latest
   become: true
-  tags: update
 
 - name: Clone Prezto
   git:
@@ -12,14 +12,13 @@
     dest: ~/.prezto
     force: no
     recursive: yes
-  tags: update
 
 - name: Link in Prezto files
   file:
     state: link
-    src: '~/.zprezto/runcoms/{{ item }}'
-    path: '~/.{{ item }}'
-  with_items:
+    src: "~/.zprezto/runcoms/{{ item }}"
+    path: "~/.{{ item }}"
+  loop:
     - zlogin
     - zlogout
     - zpreztorc

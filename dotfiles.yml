@@ -1,6 +1,7 @@
 ---
 - name: "Set up the local development environment"
-  hosts: local
-
+  hosts: localhost
+  gather_facts: false
   roles:
     - { role: git, tags: [ 'git' ] }
+    - { role: zsh, tags: [ 'zsh' ] }
