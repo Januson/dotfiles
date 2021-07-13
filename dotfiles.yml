@@ -3,5 +3,6 @@
   hosts: localhost
   gather_facts: false
   roles:
-    - { role: git, tags: [ 'git' ] }
-    - { role: zsh, tags: [ 'zsh' ] }
+    - role: git
+    - role: zsh
+    - role: podman
