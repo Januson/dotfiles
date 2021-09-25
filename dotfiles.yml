@@ -1,8 +1,9 @@
 ---
 - name: "Set up the local development environment"
   hosts: localhost
-  gather_facts: false
+  gather_facts: true
   roles:
     - role: git
     - role: zsh
     - role: podman
+    - role: java
