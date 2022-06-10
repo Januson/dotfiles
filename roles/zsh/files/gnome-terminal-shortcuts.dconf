@@ -1,0 +1,7 @@
+[/]
+close-tab='<Primary>q'
+move-tab-left='<Alt>Up'
+move-tab-right='<Alt>Down'
+new-tab='<Primary>t'
+next-tab='<Alt>Right'
+prev-tab='<Alt>Left'

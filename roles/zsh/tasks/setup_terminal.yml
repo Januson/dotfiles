@@ -1,0 +1,25 @@
+---
+- name: Create tmp directory
+  file:
+    path: /tmp/gnome/
+    state: directory
+
+- name: Copy dconfs
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/gnome/
+  loop:
+    - gnome-shortcuts.dconf
+    - gnome-terminal-profiles.dconf
+    - gnome-terminal-shortcuts.dconf
+
+- name: Setup gnome shortcuts
+  shell: |
+    dconf load /org/gnome/settings-daemon/plugins/media-keys/ < /tmp/gnome/gnome-shortcuts.dconf
+    dconf load /org/gnome/terminal/legacy/profiles/ < /tmp/gnome/gnome-terminal-profiles.dconf
+    dconf load /org/gnome/terminal/legacy/keybindings/ < /tmp/gnome/gnome-terminal-shortcuts.dconf
+
+- name: Remove tmp directory
+  file:
+    path: /tmp/gnome/
+    state: absent

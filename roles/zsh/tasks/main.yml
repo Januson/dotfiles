@@ -1,4 +1,4 @@
 ---
 - include_tasks: install_fonts.yml
-#- include_tasks: setup_terminal.yml
+- include_tasks: setup_terminal.yml
 #- include_tasks: install_prezto.yml
