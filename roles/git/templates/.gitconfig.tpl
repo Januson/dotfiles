@@ -1,3 +1,6 @@
+[init]
+  defaultBranch = master
+
 [user]
   name = {{ git.name }}
   email = {{ git.email }}
