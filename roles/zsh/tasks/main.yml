@@ -1,27 +1,4 @@
 ---
-- name: Install zsh
-  dnf:
-    name:
-      - zsh
-    state: latest
-  become: true
-
-- name: Clone Prezto
-  git:
-    repo: git@github.com:sorin-ionescu/prezto.git
-    dest: ~/.prezto
-    force: no
-    recursive: yes
-
-- name: Link in Prezto files
-  file:
-    state: link
-    src: "~/.zprezto/runcoms/{{ item }}"
-    path: "~/.{{ item }}"
-  loop:
-    - zlogin
-    - zlogout
-    - zpreztorc
-    - zprofile
-    - zshenv
-    - zshrc
+- include_tasks: install_fonts.yml
+#- include_tasks: setup_terminal.yml
+#- include_tasks: install_prezto.yml

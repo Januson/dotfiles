@@ -1,0 +1,26 @@
+---
+- name: Hack exists
+  stat:
+    path: "/usr/share/fonts/Hack*Nerd*Font*Complete*"
+  register: hack_fonts
+
+- name: Download Hack
+  unarchive:
+    src: "{{ item }}"
+    dest: "/usr/share/fonts/"
+    remote_src: yes
+  loop:
+    - https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+    - https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
+  become: yes
+  when: not hack_fonts.stat.exists
+
+- name: refresh font cache
+  command: fc-cache -v
+  become: yes
+  when: not hack_fonts.stat.exists
+
+- name: refresh font cache
+  command: setfont Hack Nerd Font
+  become: yes
+  when: not hack_fonts.stat.exists
