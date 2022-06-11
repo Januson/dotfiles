@@ -31,22 +31,3 @@
       # cd alternative
       - zoxide
     state: latest
-
-- name: Check if sdkman is installed
-  shell: sdk list java
-  register: sdkman
-  check_mode: false
-  changed_when: false
-  failed_when: sdkman.rc != 0 and result.rc != 127
-
-- name: Install sdkman
-  shell: |
-    curl -s "https://get.sdkman.io" | bash
-  when: "'command not found' in sdkman.stdout"
-
-- name: Install JVM tools
-  shell: |
-    sdk install java
-    sdk install gradle
-    sdk install maven
-  when: "'command not found' in sdkman.stdout"
