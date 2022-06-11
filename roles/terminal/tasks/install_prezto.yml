@@ -1,0 +1,25 @@
+---
+- name: Install zsh
+  dnf:
+    name:
+      - zsh
+    state: latest
+  become: true
+
+- name: Clone Prezto
+  git:
+    repo: git@github.com:sorin-ionescu/prezto.git
+    dest: ~/.prezto
+    force: no
+    recursive: yes
+
+- name: Link in Prezto files
+  copy:
+    state: link
+    src: "{{ item }}"
+    dest: "~/.zprezto/runcoms/{{ item }}"
+    mode: 0664
+    force: yes
+  loop:
+    - zpreztorc
+    - zshrc
