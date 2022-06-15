@@ -17,3 +17,8 @@
     sdk install gradle
     sdk install maven
   when: "'command not found' in sdkman.stdout"
+
+- name: Ensure Tools directory
+  file:
+    path: "lookup('env','HOME')/Tools/IDEs"
+    state: directory
