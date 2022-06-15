@@ -1,6 +1,8 @@
 ---
 - name: Install Podman
   dnf:
-    name: podman
+    name:
+      - podman
+      - podman-compose
     state: latest
   become: true

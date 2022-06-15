@@ -5,5 +5,5 @@
   roles:
     - role: git
     - role: java
+    - role: podman
     - role: terminal
-#    - role: podman
