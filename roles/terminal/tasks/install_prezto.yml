@@ -15,6 +15,18 @@
 
 - name: Link in Prezto files
   copy:
+    state: present
+    src: "{{ item.src }}"
+    dest: "{{ item.dst }}{{ item.src }}"
+    mode: 0664
+    force: yes
+  loop:
+    - {src: "zpreztorc", dst: "~/.zprezto/runcoms/"}
+    - {src: "zshrc", dst: "~/.zprezto/runcoms/"}
+    - {src: "aliases", dst: "~/."}
+
+- name: Link in Prezto files
+  copy:
     state: link
     src: "{{ item }}"
     dest: "~/.zprezto/runcoms/{{ item }}"
