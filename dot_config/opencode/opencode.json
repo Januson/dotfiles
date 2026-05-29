@@ -3,12 +3,12 @@
   "share": "disabled",
   "model": "anthropic/claude-opus-4-7",
   "small_model": "anthropic/claude-haiku-4-5",
-  "provider": {
-    "anthropic": {
-      "options": {
-        "baseURL": "{file:~/.secrets/sap-hai-url}",
-        "apiKey": "{file:~/.secrets/sap-hai-key}"
-      }
+  "agent": {
+    "build": {
+      "model": "anthropic/claude-opus-4-7"
+    },
+    "plan": {
+      "model": "anthropic/claude-sonnet-4-6"
     }
   },
   "plugin": [
@@ -89,65 +89,12 @@
       "kill -9 *": "ask"
     }
   },
-  "agent": {
-    "build": {
-      "model": "anthropic/claude-opus-4-7"
-    },
-    "plan": {
-      "model": "anthropic/claude-sonnet-4-6"
-    },
-    "explore": {
-      "description": "Fast codebase exploration",
-      "model": "anthropic/claude-sonnet-4-6",
-      "mode": "subagent",
-      "hidden": true,
-      "permission": {
-        "edit": "deny",
-        "task": "deny"
-      },
-      "prompt": "{file:./prompts/explore-guideline.md}"
-    },
-    "executor": {
-      "description": "Default execution subagent for bash commands, tests, builds, and validation",
-      "model": "anthropic/claude-haiku-4-5",
-      "mode": "subagent",
-      "hidden": true,
-      "permission": {
-        "external_directory": {
-          "/tmp": "allow",
-          "/tmp/**": "allow"
-        },
-        "task": "deny"
-      },
-      "prompt": "{file:./prompts/executor-guideline.md}"
-    },
-    "reviewer": {
-      "description": "Automated review agent",
-      "model": "anthropic/claude-sonnet-4-5",
-      "mode": "subagent",
-      "hidden": true,
-      "permission": {
-        "edit": {
-          "*": "deny",
-          ".opencode/*": "allow"
-        },
-        "task": "deny"
-      },
-      "prompt": "Use code-review skill. Review only the changed scope and write findings to .opencode/review.md."
-    },
-    "expert-reviewer": {
-      "description": "In-depth review with premium model",
-      "model": "anthropic/claude-opus-4-7",
-      "mode": "subagent",
-      "hidden": true,
-      "permission": {
-        "edit": {
-          "*": "deny",
-          ".opencode/*": "allow"
-        },
-        "task": "deny"
-      },
-      "prompt": "Use code-review skill. Perform a final in-depth review of the full diff against the task and plan, and write findings to .opencode/review.md."
+  "provider": {
+    "anthropic": {
+      "options": {
+        "baseURL": "{file:~/.secrets/sap-hai-url}",
+        "apiKey": "{file:~/.secrets/sap-hai-key}"
+      }
     }
   }
 }
