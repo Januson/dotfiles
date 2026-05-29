@@ -96,7 +96,7 @@
         "apiKey": "{file:~/.secrets/sap-hai-key}"
       },
       "models": {
-        "claude-haiku-4.5": {
+        "claude-haiku-4-5": {
           "options": {
             "toolStreaming": false
           }
