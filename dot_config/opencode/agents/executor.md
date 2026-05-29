@@ -1,4 +1,5 @@
 ---
+name: executor
 description: Default execution subagent for bash commands, tests, builds, and validation tasks.
 mode: subagent
 model: anthropic/claude-haiku-4-5
@@ -13,7 +14,6 @@ permission:
     "git push *": ask
     "git push --force*": deny
     "git reset --hard*": ask
-    "*": allow
 ---
 
 You are the executor subagent. Your job is to run bash commands, execute tests, run builds, and validate code changes on behalf of the primary agent.
