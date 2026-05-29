@@ -1,0 +1,153 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "model": "anthropic/claude-opus-4-7",
+  "small_model": "anthropic/claude-haiku-4-5",
+  "provider": {
+    "anthropic": {
+      "options": {
+        "baseURL": "{file:~/.secrets/sap-hai-url}",
+        "apiKey": "{file:~/.secrets/sap-hai-key}"
+      }
+    }
+  },
+  "plugin": [
+    "caveman-opencode-plugin@latest"
+  ],
+  "permission": {
+    "*": "ask",
+    "doom_loop": "ask",
+    "external_directory": "ask",
+    "read": {
+      "*": "allow",
+      "~/.ssh/**": "deny",
+      "~/.gnupg/**": "deny",
+      "~/.aws/**": "deny",
+      "~/.kube/**": "deny",
+      "~/.docker/**": "deny",
+      ".env*": "deny",
+      "**/.env*": "deny",
+      "*.pem": "deny",
+      "**/*.pem": "deny",
+      "*.key": "deny",
+      "**/*.key": "deny",
+      "*.p12": "deny",
+      "**/*.p12": "deny",
+      "*.jks": "deny",
+      "**/*.jks": "deny",
+      "*credentials*": "deny",
+      "**/*credentials*": "deny"
+    },
+    "edit": {
+      "~/.aws/**": "deny",
+      "~/.ssh/**": "deny",
+      "~/.gnupg/**": "deny",
+      "~/.kube/**": "deny",
+      "~/.docker/**": "deny",
+      ".env*": "deny",
+      "**/.env*": "deny",
+      "*.pem": "deny",
+      "**/*.pem": "deny",
+      "*.key": "deny",
+      "**/*.key": "deny",
+      "*.p12": "deny",
+      "**/*.p12": "deny",
+      "*.jks": "deny",
+      "**/*.jks": "deny",
+      "*credentials*": "deny",
+      "**/*credentials*": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "*.env*": "deny",
+      "*.pem*": "deny",
+      "*.key*": "deny",
+      "*.p12*": "deny",
+      "*.jks*": "deny",
+      "*/.ssh/*": "deny",
+      "*/.gnupg/*": "deny",
+      "*/.aws/*": "deny",
+      "*/.kube/*": "deny",
+      "*/.docker/*": "deny",
+      "rm *": "ask",
+      "sudo rm *": "ask",
+      "chmod -R *": "ask",
+      "chmod 000 *": "ask",
+      "chmod 0 *": "ask",
+      "chown *": "ask",
+      "sudo chown *": "ask",
+      "dd *": "ask",
+      "mkfs*": "ask",
+      "shutdown*": "ask",
+      "reboot*": "ask",
+      "halt*": "ask",
+      "poweroff*": "ask",
+      "init 0*": "ask",
+      "init 6*": "ask",
+      "killall *": "ask",
+      "pkill *": "ask",
+      "kill -9 *": "ask"
+    }
+  },
+  "agent": {
+    "build": {
+      "model": "anthropic/claude-opus-4-7"
+    },
+    "plan": {
+      "model": "anthropic/claude-sonnet-4-6"
+    },
+    "explore": {
+      "description": "Fast codebase exploration",
+      "model": "anthropic/claude-sonnet-4-6",
+      "mode": "subagent",
+      "hidden": true,
+      "permission": {
+        "edit": "deny",
+        "task": "deny"
+      },
+      "prompt": "{file:./prompts/explore-guideline.md}"
+    },
+    "executor": {
+      "description": "Default execution subagent for bash commands, tests, builds, and validation",
+      "model": "anthropic/claude-haiku-4-5",
+      "mode": "subagent",
+      "hidden": true,
+      "permission": {
+        "external_directory": {
+          "/tmp": "allow",
+          "/tmp/**": "allow"
+        },
+        "task": "deny"
+      },
+      "prompt": "{file:./prompts/executor-guideline.md}"
+    },
+    "reviewer": {
+      "description": "Automated review agent",
+      "model": "anthropic/claude-sonnet-4-5",
+      "mode": "subagent",
+      "hidden": true,
+      "permission": {
+        "edit": {
+          "*": "deny",
+          ".opencode/*": "allow"
+        },
+        "task": "deny"
+      },
+      "prompt": "Use code-review skill. Review only the changed scope and write findings to .opencode/review.md."
+    },
+    "expert-reviewer": {
+      "description": "In-depth review with premium model",
+      "model": "anthropic/claude-opus-4-7",
+      "mode": "subagent",
+      "hidden": true,
+      "permission": {
+        "edit": {
+          "*": "deny",
+          ".opencode/*": "allow"
+        },
+        "task": "deny"
+      },
+      "prompt": "Use code-review skill. Perform a final in-depth review of the full diff against the task and plan, and write findings to .opencode/review.md."
+    }
+  }
+}
