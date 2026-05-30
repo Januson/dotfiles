@@ -98,6 +98,7 @@
       "models": {
         "claude-haiku-4-5": {
           "options": {
+            // https://github.com/anomalyco/opencode/issues/23257
             "toolStreaming": false
           }
         }
