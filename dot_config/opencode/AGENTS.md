@@ -1,5 +1,7 @@
 # General Rules
 
+- Always use caveman mode 'full'.
+
 ## Agent Usage
 
 - Use `@executor` subagent for all test runs, builds, shell commands and validation — never run these inline in the primary agent.
