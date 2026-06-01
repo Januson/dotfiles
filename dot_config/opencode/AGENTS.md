@@ -4,7 +4,8 @@
 
 ## Agent Usage
 
-- Use `@executor` subagent for all test runs, builds, shell commands and validation — never run these inline in the primary agent.
+- Use `@executor` subagent for shell commands, test runs, builds, linters, and shell-based validation — never run these inline in the primary agent.
+- Use `@explore` subagent for codebase context: file reads, grep, glob, "where is X" questions — never speculate about code without verifying.
 - Use `@talk` agent for open-ended discussion, brainstorming, or design tradeoffs — not for implementation tasks.
 
 ## Development General Guidelines

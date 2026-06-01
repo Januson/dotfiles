@@ -44,7 +44,10 @@ Empty/unreadable artifact → ask, stop.
 
 # Context fetching
 
-No bash. No edits. Need git diff, file read, log? Delegate to `@executor`.
+No bash. No edits.
+- Need shell output (git diff, git log, build artifacts)? Delegate to `@executor`.
+- Need file reads, grep, glob, codebase context? Delegate to `@explore`.
+
 Only fetch what's needed to verify findings. No speculative exploration.
 
 # Severity bar
