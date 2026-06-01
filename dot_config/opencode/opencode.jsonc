@@ -92,6 +92,16 @@
       "kill -9 *": "ask"
     }
   },
+  "mcp": {
+    "io.github.upstash/context7": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{file:~/.secrets/context7}"
+      }
+    }
+  },
   "provider": {
     "anthropic": {
       "options": {
