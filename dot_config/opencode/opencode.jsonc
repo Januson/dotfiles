@@ -60,18 +60,9 @@
       "**/*credentials*": "deny"
     },
     "bash": {
+      // broad default: ask for everything
       "*": "ask",
-      "*.env*": "deny",
-      "*.pem*": "deny",
-      "*.key*": "deny",
-      "*.p12*": "deny",
-      "*.jks*": "deny",
-      "*/.aws/*": "deny",
-      "*/.docker/*": "deny",
-      "*/.gnupg/*": "deny",
-      "*/.kube/*": "deny",
-      "*/.secrets/*": "deny",
-      "*/.ssh/*": "deny",
+      // destructive ops: always ask
       "rm *": "ask",
       "sudo rm *": "ask",
       "chmod -R *": "ask",
@@ -89,7 +80,19 @@
       "init 6*": "ask",
       "killall *": "ask",
       "pkill *": "ask",
-      "kill -9 *": "ask"
+      "kill -9 *": "ask",
+      // sensitive file/path patterns: deny (evaluated last → wins)
+      "*.env*": "deny",
+      "*.pem*": "deny",
+      "*.key*": "deny",
+      "*.p12*": "deny",
+      "*.jks*": "deny",
+      "*/.aws/*": "deny",
+      "*/.docker/*": "deny",
+      "*/.gnupg/*": "deny",
+      "*/.kube/*": "deny",
+      "*/.secrets/*": "deny",
+      "*/.ssh/*": "deny"
     }
   },
   "mcp": {
