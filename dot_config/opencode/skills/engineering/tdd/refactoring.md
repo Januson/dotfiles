@@ -42,6 +42,33 @@ Remove abstractions added "for the future" with no current use.
 **Comments explaining *what*** → Rename / Extract Function  
 Code should be self-explanatory; comments should explain *why*.
 
+**Lazy class** → Inline Class / Collapse Hierarchy  
+Class doing too little. Merge or remove.
+
+**Data classes** → Encapsulate / Extract Methods  
+Objects that are just getters/setters with no behavior. Move logic in.
+
+**Message chains** → Extract Method / Hide Delegate  
+`obj.a().b().c().d()` — each level hides structure. Break the chain.
+
+**Middle man** → Remove Middle Man  
+Class exists only to delegate. Cut it.
+
+**Alternative classes with different interfaces** → Rename / Unify Interface  
+Same job, different method names. Consolidate API.
+
+**Incomplete library classes** → Wrap with Adapter  
+Third-party lib doesn't fit your needs — don't hack it, wrap it.
+
+**Refused bequest** → Push Down / Extract Superclass  
+Subclass ignores inherited stuff. Wrong hierarchy.
+
+**Black sheep** → Extract Class  
+One method or field is wildly different from others in the class.
+
+**Insider trading** → Encapsulate / Hide Delegate  
+Classes reaching into each other's internals for data.
+
 ## Testing Rule
 
 Test behavior on the public interface. Do not test private methods.
