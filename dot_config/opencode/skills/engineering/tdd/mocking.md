@@ -28,7 +28,7 @@ public Payment processPayment(Order order, PaymentClient paymentClient) {
 }
 
 // Hard to mock
-public Payment processPayment(order Order) {
+public Payment processPayment(Order order) {
     var client = new PaypalClient();
     return client.charge(order.total);
 }

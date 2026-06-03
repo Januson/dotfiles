@@ -58,7 +58,7 @@ void createUserSavesToDatabase () {
 
     var row = db.query("SELECT * FROM users WHERE name = %s".formatted("Alice"));
 
-    expect(row).toBeDefined();
+    assertThat(row.get("address")).isEqualTo("Wonderland");
 }
 
 // GOOD: Verifies through interface
