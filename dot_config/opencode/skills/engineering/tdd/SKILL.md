@@ -1,59 +1,61 @@
 ---
 name: tdd
-description: Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants integration tests, or asks for test-first development.
+description: Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", "test list", or asks for test-first development.
 ---
 
 # Test-Driven Development
 
-## Philosophy
+Canon TDD per Kent Beck ([source](https://tidyfirst.substack.com/p/canon-tdd)):
 
-Tests verify behavior through public interfaces, not implementation details. See [tests.md](tests.md) and [mocking.md](mocking.md).
+1. Write a list of the test scenarios you want to cover
+2. Turn exactly one item on the list into a runnable test
+3. Change the code to make the test (& all previous tests) pass — add discoveries to the list
+4. Optionally refactor
+5. Until the list is empty, go to 2
 
-## Anti-Pattern: Horizontal Slices
+## 1. Test List
 
-**DO NOT write all tests first, then all implementation.** One test → one implementation → repeat.
+Before listing, plan the change:
 
-```
-WRONG: RED: test1 test2 test3 → GREEN: impl1 impl2 impl3
-RIGHT: RED→GREEN: test1→impl1, test2→impl2, test3→impl3
-```
+- Use project domain glossary so test names match project vocabulary
+- Respect ADRs in the area you're touching
+- Identify [deep modules](deep_modules.md)
+- Design [testable interfaces](interface_design.md)
+- Confirm interface changes and priorities with user
 
-## Workflow
+You can't test everything. Focus on critical paths. See [test_list.md](test_list.md).
 
-### 1. Planning
+## 2. Write One Test
 
-When exploring the codebase, use the project's domain glossary so that test names and interface vocabulary match the
-project's language, and respect ADRs in the area you're touching.
+Tests verify behavior through public interfaces, not implementation details.
+See [tests.md](tests.md) and [mocking.md](mocking.md).
 
-Before writing any code:
+Write a real test — setup, invocation, assertion. Tip: work backwards from the assertion.
 
-- [ ] Confirm with user what interface changes are needed
-- [ ] Confirm with user which behaviors to test (prioritize)
-- [ ] Identify opportunities for [deep modules](deep_modules.md) (small interface, deep implementation)
-- [ ] Design interfaces for [testability](interface_design.md)
-- [ ] List the behaviors to test (not implementation steps)
-- [ ] Get user approval on the plan
+Mistakes:
+- Writing tests without assertions (coverage theater)
+- Converting all list items into tests at once (horizontal slicing)
 
-**You can't test everything.** Focus on critical paths and complex logic.
+## 3. Make It Pass
 
-### 2. Red → Green Loop
+Minimal code to pass. No more.
 
-First cycle is the tracer bullet — proves the path works end-to-end. Then repeat for each behavior:
+If you discover a new behavior, add it to the list.
+If a discovery invalidates earlier work, restart with a different test order.
 
-```
-RED:   Write test for next behavior → must fail
-GREEN: Minimal code to pass → passes
-```
+Mistakes:
+- Deleting assertions to fake-pass
+- Copying computed values into expected values (defeats double-checking)
+- Refactoring while RED — make it run, then make it right
 
-Rules:
+## 4. Refactor (Optional)
 
-- One test at a time
-- Only enough code to pass current test
-- Don't anticipate future tests
-- Keep tests focused on observable behavior
+After GREEN. See [refactoring.md](refactoring.md).
 
-### 3. Refactor
+Mistakes:
+- Refactoring further than this session needs
+- Abstracting too soon — duplication is a hint, not a command
 
-After all tests pass, see [refactoring.md](refactoring.md).
+## 5. Repeat
 
-**Never refactor while RED.**
+Continue until the list is empty — when fear of the behavior has been replaced by boredom.
