@@ -4,14 +4,17 @@
 
 **Integration-style**: Test through real interfaces, not mocks of internal parts.
 
-```typescript
+```java
 // GOOD: Tests observable behavior
-test("user can checkout with valid cart", async () => {
-    const cart = createCart();
+@DisplayName("User can checkout with valid cart")
+void userCanCheckoutWithValidCart () {
+    var cart = createCart();
     cart.add(product);
-    const result = await checkout(cart, paymentMethod);
-    expect(result.status).toBe("confirmed");
-});
+
+    var result = checkout(cart, paymentMethod);
+
+    assertThat(result.status).isEqualTo(OrderStatus.CONFIRMED);
+}
 ```
 
 Characteristics:
@@ -26,13 +29,16 @@ Characteristics:
 
 **Implementation-detail tests**: Coupled to internal structure.
 
-```typescript
+```java
 // BAD: Tests implementation details
-test("checkout calls paymentService.process", async () => {
-    const mockPayment = jest.mock(paymentService);
-    await checkout(cart, payment);
-    expect(mockPayment.process).toHaveBeenCalledWith(cart.total);
-});
+@DisplayName("Checkout calls paymentService.process")
+void checkoutCallsPaymentServiceProcess () {
+    var mockPayment = mock(PaymentService.class);
+
+    checkout(cart, payment);
+
+    verify(mockPayment).process(eq(cart.total));
+}
 ```
 
 Red flags:
@@ -44,18 +50,24 @@ Red flags:
 - Test name describes HOW not WHAT
 - Verifying through external means instead of interface
 
-```typescript
+```java
 // BAD: Bypasses interface to verify
-test("createUser saves to database", async () => {
-    await createUser({name: "Alice"});
-    const row = await db.query("SELECT * FROM users WHERE name = ?", ["Alice"]);
+@DisplayName("CreateUser saves to database")
+void checkoutCallsPaymentServiceProcess () {
+    createUser("Alice");
+
+    var row = db.query("SELECT * FROM users WHERE name = %s".formatted("Alice"));
+
     expect(row).toBeDefined();
-});
+}
 
 // GOOD: Verifies through interface
-test("createUser makes user retrievable", async () => {
-    const user = await createUser({name: "Alice"});
-    const retrieved = await getUser(user.id);
-    expect(retrieved.name).toBe("Alice");
-});
+@DisplayName("CreateUser makes user retrievable")
+void checkoutCallsPaymentServiceProcess () {
+    var user = createUser("Alice");
+
+    var retrieved = getUser(user.id);
+
+    assertThat(retrieved.name).isEqualTo("Alice");
+}
 ```

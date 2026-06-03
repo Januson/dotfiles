@@ -10,7 +10,7 @@ From "A Philosophy of Software Design":
 ├─────────────────────┤
 │                     │
 │                     │
-│  Deep Implementation│  ← Complex logic hidden
+│ Deep Implementation │  ← Complex logic hidden
 │                     │
 │                     │
 └─────────────────────┘
@@ -19,11 +19,11 @@ From "A Philosophy of Software Design":
 **Shallow module** = large interface + little implementation (avoid)
 
 ```
-┌─────────────────────────────────┐
-│       Large Interface           │  ← Many methods, complex params
-├─────────────────────────────────┤
-│  Thin Implementation            │  ← Just passes through
-└─────────────────────────────────┘
+┌─────────────────────┐
+│   Large Interface   │  ← Many methods, complex params
+├─────────────────────┤
+│ Thin Implementation │  ← Just passes through
+└─────────────────────┘
 ```
 
 When designing interfaces, ask:

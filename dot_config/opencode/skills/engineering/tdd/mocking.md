@@ -21,15 +21,15 @@ At system boundaries, design interfaces that are easy to mock:
 
 Pass external dependencies in rather than creating them internally:
 
-```typescript
+```java
 // Easy to mock
-function processPayment(order, paymentClient) {
+public Payment processPayment(Order order, PaymentClient paymentClient) {
     return paymentClient.charge(order.total);
 }
 
 // Hard to mock
-function processPayment(order) {
-    const client = new StripeClient(process.env.STRIPE_KEY);
+public Payment processPayment(order Order) {
+    var client = new PaypalClient();
     return client.charge(order.total);
 }
 ```
@@ -38,18 +38,18 @@ function processPayment(order) {
 
 Create specific functions for each external operation instead of one generic function with conditional logic:
 
-```typescript
+```java
 // GOOD: Each function is independently mockable
-const api = {
-    getUser: (id) => fetch(`/users/${id}`),
-    getOrders: (userId) => fetch(`/users/${userId}/orders`),
-    createOrder: (data) => fetch('/orders', {method: 'POST', body: data}),
-};
+interface Api {
+    User getUser(UUID id);
+    List<Order> getOrders(UUID userId);
+    Order createOrder(OrderData data);
+}
 
 // BAD: Mocking requires conditional logic inside the mock
-const api = {
-    fetch: (endpoint, options) => fetch(endpoint, options),
-};
+interface Api {
+    Response fetch(Endpoint endpoint, Options options);
+}
 ```
 
 The SDK approach means:
