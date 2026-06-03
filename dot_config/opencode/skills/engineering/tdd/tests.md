@@ -53,7 +53,7 @@ Red flags:
 ```java
 // BAD: Bypasses interface to verify
 @DisplayName("CreateUser saves to database")
-void checkoutCallsPaymentServiceProcess () {
+void createUserSavesToDatabase () {
     createUser("Alice");
 
     var row = db.query("SELECT * FROM users WHERE name = %s".formatted("Alice"));
@@ -63,7 +63,7 @@ void checkoutCallsPaymentServiceProcess () {
 
 // GOOD: Verifies through interface
 @DisplayName("CreateUser makes user retrievable")
-void checkoutCallsPaymentServiceProcess () {
+void createUserMakesUserRetrievable () {
     var user = createUser("Alice");
 
     var retrieved = getUser(user.id);

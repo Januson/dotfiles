@@ -2,24 +2,19 @@
 
 Good interfaces make testing natural:
 
-1. **Accept dependencies, don't create them**
+## **Accept dependencies, don't create them**
 
 ```java
-// Testable
+// Testable: dependency injected via method param or constructor
 Payment processOrder(Order order, PaymentGateway paymentGateway) {}
 
-// Testable
-Payment processOrder(Order order) {
-    return paymentGateway.process();
-}
-
-// Hard to test
+// Hard to test: dependency created internally
 Payment processOrder(Order order) {
     var gateway = new StripeGateway();
 }
 ```
 
-2. **Return results, don't produce side effects**
+## **Return results, don't produce side effects**
 
 ```java
 // Testable
@@ -31,6 +26,6 @@ void applyDiscount(Cart cart) {
 }
 ```
 
-3. **Small surface area**
+## **Small surface area**
 - Fewer methods = fewer tests needed
 - Fewer params = simpler test setup
