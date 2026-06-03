@@ -5,57 +5,36 @@ description: Test-driven development with red-green-refactor loop. Use when user
 
 # Test-Driven Development
 
-Canon TDD per Kent Beck ([source](https://tidyfirst.substack.com/p/canon-tdd)):
+Canon TDD per Kent Beck:
 
-1. Write a list of the test scenarios you want to cover
-2. Turn exactly one item on the list into a runnable test
-3. Change the code to make the test (& all previous tests) pass — add discoveries to the list
+1. List the test scenarios to cover
+2. Turn one item into a runnable test
+3. Make all tests pass — add discoveries to the list
 4. Optionally refactor
-5. Until the list is empty, go to 2
+5. Repeat until list empty
 
 ## 1. Test List
 
-Before listing, plan the change:
-
-- Use project domain glossary so test names match project vocabulary
-- Respect ADRs in the area you're touching
-- Identify [deep modules](deep_modules.md)
-- Design [testable interfaces](interface_design.md)
-- Confirm interface changes and priorities with user
-
-You can't test everything. Focus on critical paths. See [test_list.md](test_list.md).
+See [test_list.md](test_list.md). Identify [deep modules](deep_modules.md) and [testable interfaces](interface_design.md). Confirm priorities with user.
 
 ## 2. Write One Test
 
-Tests verify behavior through public interfaces, not implementation details.
-See [tests.md](tests.md) and [mocking.md](mocking.md).
+Test behavior through public interfaces, not implementation. See [tests.md](tests.md), [mocking.md](mocking.md).
 
-Write a real test — setup, invocation, assertion. Tip: work backwards from the assertion.
-
-Mistakes:
-- Writing tests without assertions (coverage theater)
-- Converting all list items into tests at once (horizontal slicing)
+Mistakes: tests without assertions; converting all list items at once.
 
 ## 3. Make It Pass
 
-Minimal code to pass. No more.
+Minimal code. Add discovered behaviors to list. If discovery invalidates earlier work, restart with different order.
 
-If you discover a new behavior, add it to the list.
-If a discovery invalidates earlier work, restart with a different test order.
-
-Mistakes:
-- Deleting assertions to fake-pass
-- Copying computed values into expected values (defeats double-checking)
-- Refactoring while RED — make it run, then make it right
+Mistakes: deleting assertions to fake-pass; copying computed values into expected; refactoring while RED.
 
 ## 4. Refactor (Optional)
 
 After GREEN. See [refactoring.md](refactoring.md).
 
-Mistakes:
-- Refactoring further than this session needs
-- Abstracting too soon — duplication is a hint, not a command
+Mistakes: refactoring beyond session need; abstracting too soon — duplication is a hint, not a command.
 
 ## 5. Repeat
 
-Continue until the list is empty — when fear of the behavior has been replaced by boredom.
+Until list is empty.
