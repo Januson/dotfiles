@@ -1,11 +1,27 @@
 # Good and Bad Tests
 
-## Good Tests
+## Beck's Test Desiderata
 
-**Integration-style**: Test through real interfaces, not mocks of internal parts.
+Good tests are:
+
+- **Isolated** — don't affect each other
+- **Composable** — properties combine cleanly
+- **Deterministic** — same input, same result
+- **Fast** — quick feedback
+- **Writable** — cheap to author
+- **Readable** — clear intent
+- **Behavioral** — sensitive to behavior changes, not implementation
+- **Structure-insensitive** — survive refactors
+- **Automated** — no manual steps
+- **Specific** — failure points to cause
+- **Predictive** — pass means code works
+- **Inspiring** — confidence on green
+
+## Good Tests
 
 ```java
 // GOOD: Tests observable behavior
+// Behavioral, Structure-insensitive, Readable, Specific
 @DisplayName("User can checkout with valid cart")
 void userCanCheckoutWithValidCart () {
     var cart = createCart();
@@ -17,20 +33,11 @@ void userCanCheckoutWithValidCart () {
 }
 ```
 
-Characteristics:
-
-- Tests behavior users/callers care about
-- Uses public API only
-- Survives internal refactors
-- Describes WHAT, not HOW
-- One logical assertion per test
-
 ## Bad Tests
-
-**Implementation-detail tests**: Coupled to internal structure.
 
 ```java
 // BAD: Tests implementation details
+// Violates: Behavioral, Structure-insensitive, Specific
 @DisplayName("Checkout calls paymentService.process")
 void checkoutCallsPaymentServiceProcess () {
     var mockPayment = mock(PaymentService.class);
@@ -41,27 +48,20 @@ void checkoutCallsPaymentServiceProcess () {
 }
 ```
 
-Red flags:
-
-- Mocking internal collaborators
-- Testing private methods
-- Asserting on call counts/order
-- Test breaks when refactoring without behavior change
-- Test name describes HOW not WHAT
-- Verifying through external means instead of interface
-
 ```java
 // BAD: Bypasses interface to verify
+// Violates: Behavioral, Structure-insensitive, Readable
 @DisplayName("CreateUser saves to database")
 void createUserSavesToDatabase () {
     createUser("Alice");
 
     var row = db.query("SELECT * FROM users WHERE name = %s".formatted("Alice"));
 
-    assertThat(row.get("address")).isEqualTo("Wonderland");
+    assertThat(row).isNotNull();
 }
 
 // GOOD: Verifies through interface
+// Behavioral, Structure-insensitive, Readable
 @DisplayName("CreateUser makes user retrievable")
 void createUserMakesUserRetrievable () {
     var user = createUser("Alice");
