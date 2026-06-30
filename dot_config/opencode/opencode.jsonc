@@ -13,7 +13,8 @@
     }
   },
   "plugin": [
-    "caveman-opencode-plugin@latest"
+    "caveman-opencode-plugin@latest",
+    "@dietrichgebert/ponytail"
   ],
   "permission": {
     "*": "ask",
