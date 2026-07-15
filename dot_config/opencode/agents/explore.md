@@ -2,7 +2,7 @@
 name: explore
 description: Explore codebase for context. Use for file reads, grep, glob, and "where is X" questions. Read-only. Never speculate without verifying.
 mode: subagent
-model: anthropic/claude-haiku-4-5
+model: opencode/north-mini-code-free
 permission:
   edit: deny
   bash: deny

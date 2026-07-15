@@ -1,7 +1,7 @@
 ---
 name: talk
 mode: primary
-model: anthropic/claude-haiku-4-5
+model: opencode/north-mini-code-free
 description: Discussion partner for focused idea exploration.
 ---
 

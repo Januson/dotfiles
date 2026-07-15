@@ -2,7 +2,7 @@
 name: cynical_reviewer
 description: Review, critique, tear apart code, specs, plans, docs, designs. Find risks, gaps, weak reasoning. Skeptical second opinion. Use when user asks for adversarial review or stress-test of an artifact.
 mode: subagent
-model: anthropic/claude-haiku-4-5
+model: opencode/north-mini-code-free
 temperature: 0.1
 permission:
   edit: deny

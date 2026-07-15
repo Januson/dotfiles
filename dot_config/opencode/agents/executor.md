@@ -2,7 +2,7 @@
 name: executor
 description: Run bash commands, tests, builds, linters. Use for any shell execution, validation, or artifact inspection that does not require file edits.
 mode: subagent
-model: anthropic/claude-haiku-4-5
+model: opencode/north-mini-code-free
 permission:
   edit: deny
   webfetch: deny
