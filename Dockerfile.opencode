@@ -1,10 +1,14 @@
 # syntax=docker/dockerfile:1
 FROM alpine:latest AS installer
 
-RUN apk add --no-cache curl bash tar
+RUN apk add --no-cache curl bash tar libstdc++
 RUN curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path
+RUN /root/.opencode/bin/opencode plugin caveman-opencode-plugin@latest \
+    && /root/.opencode/bin/opencode plugin @dietrichgebert/ponytail
 
 FROM alpine:latest
+
+ENV LANG=C.UTF-8
 
 RUN apk add --no-cache \
   ca-certificates \
@@ -17,9 +21,11 @@ RUN apk add --no-cache \
   && chown dev:dev /home/dev/.config/opencode
 
 COPY --from=installer /root/.opencode/bin/opencode /usr/local/bin/opencode
+COPY --from=installer --chown=dev:dev /root/.cache/opencode /home/dev/.cache/opencode
 COPY ./dot_config/opencode /home/dev/.config/opencode
 
 WORKDIR /work
+USER dev
 
 ENTRYPOINT ["opencode"]
 CMD []
