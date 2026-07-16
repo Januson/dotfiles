@@ -3,8 +3,6 @@ FROM alpine:latest AS installer
 
 RUN apk add --no-cache curl bash tar libstdc++
 RUN curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path
-RUN /root/.opencode/bin/opencode plugin caveman-opencode-plugin@latest \
-    && /root/.opencode/bin/opencode plugin @dietrichgebert/ponytail
 
 FROM alpine:latest
 
@@ -16,13 +14,9 @@ RUN apk add --no-cache \
   ripgrep \
   fd \
   libstdc++ \
-  && adduser -D -h /home/dev dev \
-  && mkdir -p /home/dev/.config/opencode \
-  && chown dev:dev /home/dev/.config/opencode
+  && adduser -D -h /home/dev dev
 
 COPY --from=installer /root/.opencode/bin/opencode /usr/local/bin/opencode
-COPY --from=installer --chown=dev:dev /root/.cache/opencode /home/dev/.cache/opencode
-COPY ./dot_config/opencode /home/dev/.config/opencode
 
 WORKDIR /work
 USER dev
