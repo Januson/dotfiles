@@ -21,6 +21,10 @@ cursor-style-blink = false
 shell-integration-features = no-cursor,ssh-env
 
 # Key bindings
+# Tab management
+keybind = ctrl+t=new_tab
+keybind = alt+q=close_tab
+
 # Tab navigation: opt+left/right = prev/next tab
 keybind = alt+arrow_left=previous_tab
 keybind = alt+arrow_right=next_tab
