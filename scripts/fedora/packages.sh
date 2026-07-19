@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sudo dnf install -y \
-    fish \
-    ripgrep \
-    ghostty \
-    akmod-nvidia
+./scripts/fedora/packages/packages.sh
+./scripts/fedora/packages/rust.sh

@@ -3,6 +3,6 @@ set -euo pipefail
 
 ./scripts/fedora/repos.sh
 ./scripts/fedora/packages.sh
-./scripts/fedora/fonts.sh
-./scripts/fedora/starship.sh
-./scripts/fedora/rust.sh
+
+./scripts/fedora/terminal.sh
+./scripts/fedora/tweaks.sh

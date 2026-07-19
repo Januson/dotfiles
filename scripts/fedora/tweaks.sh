@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Disable hot corners
-gsettings set org.gnome.desktop.interface enable-hot-corners false
+./scripts/fedora/tweaks/disable_hot_corner.sh
+./scripts/fedora/tweaks/shortcuts.sh

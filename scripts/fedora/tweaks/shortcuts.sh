@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 add-shortcut() {
     local name="$1"
