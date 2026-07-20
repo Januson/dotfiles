@@ -1,0 +1,126 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "model": "anthropic/claude-sonnet-4-6",
+  "small_model": "anthropic/claude-haiku-4-5",
+  "agent": {
+    "talk": {},
+    "plan": {
+      "model": "anthropic/claude-opus-4-7"
+    },
+    "build": {
+      "model": "anthropic/claude-sonnet-4-6"
+    }
+  },
+  "plugin": [
+    "caveman-opencode-plugin@latest",
+    "@dietrichgebert/ponytail"
+  ],
+  "permission": {
+    "*": "ask",
+    "doom_loop": "ask",
+    "external_directory": "ask",
+    "read": {
+      "*": "allow",
+      "~/.aws/**": "deny",
+      "~/.docker/**": "deny",
+      "~/.gnupg/**": "deny",
+      "~/.kube/**": "deny",
+      "~/.secrets/**": "deny",
+      "~/.ssh/**": "deny",
+      ".env*": "deny",
+      "**/.env*": "deny",
+      "*.pem": "deny",
+      "**/*.pem": "deny",
+      "*.key": "deny",
+      "**/*.key": "deny",
+      "*.p12": "deny",
+      "**/*.p12": "deny",
+      "*.jks": "deny",
+      "**/*.jks": "deny",
+      "*credentials*": "deny",
+      "**/*credentials*": "deny"
+    },
+    "edit": {
+      "~/.aws/**": "deny",
+      "~/.docker/**": "deny",
+      "~/.gnupg/**": "deny",
+      "~/.kube/**": "deny",
+      "~/.secrets/**": "deny",
+      "~/.ssh/**": "deny",
+      ".env*": "deny",
+      "**/.env*": "deny",
+      "*.pem": "deny",
+      "**/*.pem": "deny",
+      "*.key": "deny",
+      "**/*.key": "deny",
+      "*.p12": "deny",
+      "**/*.p12": "deny",
+      "*.jks": "deny",
+      "**/*.jks": "deny",
+      "*credentials*": "deny",
+      "**/*credentials*": "deny"
+    },
+    "bash": {
+      // broad default: ask for everything
+      "*": "ask",
+      // destructive ops: always ask
+      "rm *": "ask",
+      "sudo rm *": "ask",
+      "chmod -R *": "ask",
+      "chmod 000 *": "ask",
+      "chmod 0 *": "ask",
+      "chown *": "ask",
+      "sudo chown *": "ask",
+      "dd *": "ask",
+      "mkfs*": "ask",
+      "shutdown*": "ask",
+      "reboot*": "ask",
+      "halt*": "ask",
+      "poweroff*": "ask",
+      "init 0*": "ask",
+      "init 6*": "ask",
+      "killall *": "ask",
+      "pkill *": "ask",
+      "kill -9 *": "ask",
+      // sensitive file/path patterns: deny (evaluated last → wins)
+      "*.env*": "deny",
+      "*.pem*": "deny",
+      "*.key*": "deny",
+      "*.p12*": "deny",
+      "*.jks*": "deny",
+      "*/.aws/*": "deny",
+      "*/.docker/*": "deny",
+      "*/.gnupg/*": "deny",
+      "*/.kube/*": "deny",
+      "*/.secrets/*": "deny",
+      "*/.ssh/*": "deny"
+    }
+  },
+  "mcp": {
+    "io.github.upstash/context7": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{file:~/.secrets/context7}"
+      }
+    }
+  },
+  "provider": {
+    "anthropic": {
+      "options": {
+        "baseURL": "{file:~/.secrets/sap-hai-url}",
+        "apiKey": "{file:~/.secrets/sap-hai-key}"
+      },
+      "models": {
+        "claude-haiku-4-5": {
+          "options": {
+            // https://github.com/anomalyco/opencode/issues/23257
+            "toolStreaming": false
+          }
+        }
+      }
+    }
+  }
+}
