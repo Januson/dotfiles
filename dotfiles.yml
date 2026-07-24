@@ -1,9 +1,0 @@
----
-- name: "Set up the local development environment"
-  hosts: localhost
-  gather_facts: true
-  roles:
-    - role: git
-    - role: java
-    - role: containers
-    - role: terminal
