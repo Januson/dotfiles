@@ -1,6 +1,0 @@
-OPENCODE_MODEL_SMALL="anthropic/claude-haiku-4-5"
-OPENCODE_MODEL_MEDIUM="anthropic/claude-sonnet-4-6"
-OPENCODE_MODEL_BIG="anthropic/claude-opus-4-7"
-#OPENCODE_MODEL_SMALL="opencode/north-mini-code-free"
-#OPENCODE_MODEL_MEDIUM="opencode/deepseek-v4-flash-free"
-#OPENCODE_MODEL_BIG="opencode/big-pickle"

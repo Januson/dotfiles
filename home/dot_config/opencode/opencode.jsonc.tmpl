@@ -2,15 +2,15 @@
   "$schema": "https://opencode.ai/config.json",
   "share": "disabled",
 //  TODO: Mame models switchable. Something profiles for home/work would be nice.
-  "model": "opencode/deepseek-v4-flash-free",
-  "small_model": "opencode/north-mini-code-free",
+  "model": "{{ .opencode.model_medium }}",
+  "small_model": "{{ .opencode.model_small }}",
   "agent": {
     "talk": {},
     "plan": {
-      "model": "opencode/big-pickle"
+      "model": "{{ .opencode.model_big }}"
     },
     "build": {
-      "model": "opencode/deepseek-v4-flash-free"
+      "model": "{{ .opencode.model_medium }}"
     }
   },
   "plugin": [

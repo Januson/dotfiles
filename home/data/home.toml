@@ -1,0 +1,11 @@
+[data]
+profile = "work"
+
+[features]
+work = true
+personal = false
+
+[opencode]
+model_small = "opencode/north-mini-code-free"
+model_medium = "opencode/deepseek-v4-flash-free"
+model_big = "opencode/big-pickle"

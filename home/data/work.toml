@@ -1,0 +1,11 @@
+[data]
+profile = "work"
+
+[features]
+work = true
+personal = false
+
+[opencode]
+model_small = "anthropic/claude-haiku-4-5"
+model_medium = "anthropic/claude-sonnet-4-6"
+model_big = "anthropic/claude-opus-4-7"
