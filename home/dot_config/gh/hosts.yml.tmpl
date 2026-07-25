@@ -1,0 +1,11 @@
+{{ .git.work.address }}:
+    git_protocol: https
+    user: {{ .git.work.user }}
+    users:
+        {{ .git.work.user }}:
+
+github.com:
+  git_protocol: ssh
+  user: {{ .git.home.user }}
+  users:
+    {{ .git.home.user }}:
