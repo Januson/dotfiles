@@ -1,9 +1,8 @@
 [data]
-profile = "work"
+profile = "home"
 
 [features]
-work = true
-personal = false
+work = false
 
 [opencode]
 model_small = "opencode/north-mini-code-free"
