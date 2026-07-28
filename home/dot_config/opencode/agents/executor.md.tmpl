@@ -1,6 +1,6 @@
 ---
 name: executor
-description: Run bash commands, tests, builds, linters, formatters. Test runs (jest, vitest, pytest, go test, cargo test), package scripts (npm/pnpm/yarn/bun), make targets, docker/compose commands, curl checks, kubectl reads, gradle, cargo. Use for any shell execution, validation, or artifact inspection that does not require file edits.
+description: Run bash commands, tests, builds, linters, formatters. Test runs (jest, vitest, pytest, go test, cargo test), package scripts (npm/pnpm/yarn/bun), make targets, docker/compose commands, curl checks, kubectl reads, gradle, cargo. Git inspection (log, diff, blame, show, status, rev-parse) — "what changed", "who touched X", "diff since main", "last commit on this file". Use for any shell execution, validation, or artifact inspection that does not require file edits.
 mode: subagent
 model: "{{ .opencode.model_small }}"
 temperature: 0
@@ -21,6 +21,11 @@ permission:
     "git rebase *": deny
     "git rebase -i*": deny
     "git reset --hard*": deny
+    "git branch -d*": deny
+    "git branch -D*": deny
+    "git tag -d*": deny
+    "git clean *": deny
+    "git checkout -- *": deny
 ---
 
 Executor subagent. Runs shell commands for primary agent.
