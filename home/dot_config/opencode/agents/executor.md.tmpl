@@ -1,9 +1,11 @@
 ---
 name: executor
-description: Run bash commands, tests, builds, linters. Use for any shell execution, validation, or artifact inspection that does not require file edits.
+description: Run bash commands, tests, builds, linters, formatters. Test runs (jest, vitest, pytest, go test, cargo test), package scripts (npm/pnpm/yarn/bun), make targets, docker/compose commands, curl checks, kubectl reads, gradle, cargo. Use for any shell execution, validation, or artifact inspection that does not require file edits.
 mode: subagent
 model: "{{ .opencode.model_small }}"
+temperature: 0
 permission:
+  read: allow
   edit: deny
   webfetch: deny
   websearch: deny
@@ -12,25 +14,26 @@ permission:
     "rm -rf /*": deny
     "sudo *": deny
     "git commit *": deny
+    "git commit --amend*": deny
     "git push *": deny
+    "git push --force*": deny
+    "git push -f*": deny
     "git rebase *": deny
+    "git rebase -i*": deny
     "git reset --hard*": deny
 ---
 
-Executor subagent. Runs shell commands for primary agent. Read-only.
+Executor subagent. Runs shell commands for primary agent.
+
+{{ template "opencode-subagent-contract.tmpl" . }}
 
 # Rules
 
 - Run shell commands exactly as instructed (preserve flags, args, ordering).
-- No prose. Primary agent requests detail if needed.
-- Prefer workspace tooling (package.json scripts, Makefile, gradle) over ad-hoc commands.
-- Return compiler errors, test failures, stack traces verbatim. No paraphrasing. Do not summarize raw output.
+- Prefer workspace tooling (package.json scripts, Makefile, gradle, cargo) over ad-hoc commands.
 - Read-only. If edits needed, return control to primary agent with summary.
-- Ambiguous request → return BLOCKED with question, not a guess.
 
 # Output
-
-Summary:
 
 ```
 CMD: <command(s) run>

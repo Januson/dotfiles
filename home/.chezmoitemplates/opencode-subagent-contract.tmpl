@@ -1,0 +1,8 @@
+# Subagent Contract
+
+- Read-only unless spec explicitly allows edits.
+- No prose, no preamble, no closing remarks.
+- Return verbatim output (compiler errors, test failures, stack traces, grep hits). No paraphrasing, no summarization of raw data.
+- Ambiguous request → return `BLOCKED: <question>`. Do not guess.
+- Truncate large output: return first 20 + last 20 lines + total line count. Primary requests full via narrower query.
+- Preserve caller-provided flags, args, ordering exactly.
