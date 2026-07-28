@@ -13,19 +13,15 @@ permission:
     "rm -rf *": deny
     "rm -rf /*": deny
     "sudo *": deny
-    "git commit *": deny
-    "git commit --amend*": deny
-    "git push *": deny
-    "git push --force*": deny
-    "git push -f*": deny
-    "git rebase *": deny
-    "git rebase -i*": deny
-    "git reset --hard*": deny
     "git branch -d*": deny
     "git branch -D*": deny
-    "git tag -d*": deny
-    "git clean *": deny
     "git checkout -- *": deny
+    "git clean *": deny
+    "git commit *": deny
+    "git push *": deny
+    "git rebase *": deny
+    "git reset --hard*": deny
+    "git tag -d*": deny
 ---
 
 Executor subagent. Runs shell commands for primary agent.
