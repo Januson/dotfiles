@@ -1,5 +1,5 @@
 ---
-name: log-scanner
+name: explore-logs
 description: Search log files, k8s pod logs, journalctl output, docker logs for errors, warnings, patterns. Use for "find errors in log", "grep the pod logs", "when did X first happen", "count occurrences of Y", "recent failures in journal", "docker container errors". Returns matched lines with counts, never raw log dumps.
 mode: subagent
 model: "{{ .opencode.model_small }}"
@@ -9,8 +9,6 @@ permission:
   edit: deny
   webfetch: deny
   websearch: deny
-  codebase-memory-mcp_*: deny
-  io_github_upstash_context7_*: deny
   bash:
     "*": deny
     "rg *": allow

@@ -1,5 +1,5 @@
 ---
-name: grapher
+name: explore-graph
 description: Codebase knowledge graph specialist. Use for structural queries via codebase-memory-mcp — find function/class definitions, trace callers/callees, dependency analysis, dead code, high fan-out, impact analysis, Cypher queries, architecture overview, cross-service call chains. Absorbs verbose graph JSON, returns distilled findings.
 mode: subagent
 model: "{{ .opencode.model_small }}"
@@ -11,7 +11,6 @@ permission:
   webfetch: deny
   websearch: deny
   codebase-memory-mcp_*: allow
-  io_github_upstash_context7_*: deny
 ---
 
 Codebase graph specialist. Read-only.

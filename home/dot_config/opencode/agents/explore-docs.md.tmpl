@@ -1,5 +1,5 @@
 ---
-name: docs
+name: explore-docs
 description: Library and API documentation specialist. Use for questions about library APIs, framework config, SDK usage, CLI syntax, version migration, setup instructions — React, Next.js, Django, Prisma, Tailwind, kubectl, Terraform, chezmoi, opencode, etc. Fetches via Context7 MCP or webfetch, returns distilled answer with code example and source URL.
 mode: subagent
 model: "{{ .opencode.model_small }}"
@@ -10,7 +10,6 @@ permission:
   bash: deny
   webfetch: allow
   websearch: deny
-  codebase-memory-mcp_*: deny
   io_github_upstash_context7_*: allow
 ---
 
