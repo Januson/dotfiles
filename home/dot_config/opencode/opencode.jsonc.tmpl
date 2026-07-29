@@ -116,5 +116,23 @@
         "CONTEXT7_API_KEY": "{env:CONTEXT7_KEY}"
       }
     }
+  },
+{{ if .features.work }}
+  "provider": {
+    "anthropic": {
+      "options": {
+        "baseURL": "{file:~/.secrets/sap-hai-url}",
+        "apiKey": "{file:~/.secrets/sap-hai-key}"
+      },
+      "models": {
+        "claude-haiku-4-5": {
+          "options": {
+            // https://github.com/anomalyco/opencode/issues/23257
+            "toolStreaming": false
+          }
+        }
+      }
+    }
   }
+{{ end }}
 }
