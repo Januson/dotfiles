@@ -11,3 +11,8 @@ Delegate before doing. Never inline a tool if a subagent covers it:
 - `@explore-logs` — log files, k8s pod logs, journalctl, docker logs
 - `@explore-local` — text/file search: grep, glob, ripgrep, file reads, string literals, config values
 - `@executor` — shell, tests, builds, linters, git inspection (log/diff/blame/show/status)
+
+## MCP Usage
+
+- Use Context7 MCP (via @explore-docs) for library/API documentation, code generation, setup or configuration steps without me having to explicitly ask.
+- Use codebase-memory-mcp (via @explore-graph) for code search, symbol/definition lookup, callers/callees, and architecture queries without me having to explicitly ask.
