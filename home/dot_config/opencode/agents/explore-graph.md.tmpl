@@ -19,7 +19,7 @@ Codebase graph specialist. Read-only.
 
 # Rules
 
-- First call: `list_projects`. Not indexed → `index_repository(repo_path=<cwd>, mode=fast)` once per session, then proceed. Re-index only if caller explicitly asks.
+- First call: `list_projects`. If current project not indexed → return `BLOCKED: project not indexed, invoke index-project skill first.`
 - Symbol/function questions: `search_graph` → `trace_path` → `get_code_snippet`.
 - Aggregations, patterns, cross-service edges: `query_graph` with Cypher.
 - Architecture questions: `get_architecture(aspects=["overview"])`.
