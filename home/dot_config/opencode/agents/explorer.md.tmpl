@@ -38,11 +38,13 @@ permission:
 
 # Route
 
-- Symbol / caller / callee / architecture / dead code / cross-service → codebase-memory-mcp.
-- Library / API / SDK / CLI / config / migration → Context7 (`resolve-library-id` → `query-docs`). `webfetch` only when Context7 has no coverage and URL is unambiguous.
-- String literal / error / config value / filename / non-code file → `grep` / `glob` / `read`.
-- Log file / pod log / journalctl / docker log → scoped bash (`kubectl logs*`, `journalctl*`, `docker logs*`, `rg -c`, `zgrep *`).
-- Specific file/line already identified → `read`.
+Priority order (stop at first that fits):
+
+1. **codebase-memory-mcp** — symbol / caller / callee / architecture / dead code / cross-service / any structural or repo-wide question. If graph could answer, use graph.
+2. **Context7** — library / API / SDK / CLI / config / migration (`resolve-library-id` → `query-docs`). `webfetch` only when Context7 has no coverage and URL is unambiguous.
+3. **read** — specific file/line already identified (user-named path or surfaced by prior step).
+4. **grep / glob** — string literal / error message / config value / filename / non-code file (Dockerfile, YAML, shell). Fallback only. Never for questions codebase-memory-mcp could answer.
+5. **scoped bash** — log file / pod log / journalctl / docker log (`kubectl logs*`, `journalctl*`, `docker logs*`, `rg -c`, `zgrep *`).
 
 # Rules
 
