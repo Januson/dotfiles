@@ -23,9 +23,10 @@ Graph tools return precise structural results in ~500 tokens vs ~80K for grep.
 
 ## Exploration Workflow
 1. `list_projects` — check if project is indexed
-2. `get_graph_schema` — understand node/edge types
-3. `search_graph(label="Function", name_pattern=".*Pattern.*")` — find code
-4. `get_code_snippet(qualified_name="project.path.FuncName")` — read source
+2. `index_repository(repo_path=<cwd>, mode=fast)` index project if needed
+3. `get_graph_schema` — understand node/edge types
+4. `search_graph(label="Function", name_pattern=".*Pattern.*")` — find code
+5. `get_code_snippet(qualified_name="project.path.FuncName")` — read source
 
 ## Tracing Workflow
 1. `search_graph(name_pattern=".*FuncName.*")` — discover exact name
