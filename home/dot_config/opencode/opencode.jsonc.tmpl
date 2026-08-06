@@ -115,10 +115,11 @@
     }
   },
 {{ if .features.work }}
+  "disabled_providers": ["opencode"],
   "provider": {
     "anthropic": {
       "options": {
-        "baseURL": "{file:~/.secrets/sap-hai-url}",
+        "baseURL": "{file:~/.secrets/sap-hai-url}/anthropic/v1",
         "apiKey": "{file:~/.secrets/sap-hai-key}"
       },
       "models": {
@@ -128,6 +129,29 @@
             "toolStreaming": false
           }
         }
+      }
+    },
+    "openai": {
+      "options": {
+        "baseURL": "{file:~/.secrets/sap-hai-url}/openai/v1",
+        "apiKey": "{file:~/.secrets/sap-hai-key}"
+      },
+      "whitelist": [
+        "gpt-5.5",
+      ]
+    },
+    "hai-openai": {
+      "npm": "@ai-sdk/openai",
+      "options": {
+        "baseURL": "{file:~/.secrets/sap-hai-url}/openai/v1",
+        "apiKey": "{file:~/.secrets/sap-hai-key}"
+      },
+      "models": {
+        "gpt-5.4": {},
+        "gpt-5": {},
+        "gpt-5-mini": {},
+        "gpt-4.1": {},
+        "gpt-4.1-mini": {}
       }
     }
   }
